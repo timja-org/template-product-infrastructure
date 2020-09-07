@@ -1,0 +1,8 @@
+{
+  "component_id": "",
+  "product": "{{ cookiecutter.component_id }}",
+  "description": "Product infrastructure for {{ cookiecutter.product }}",
+  "aad_group_object_id": "",
+  "enable_app_insights": "Yes",
+  "enable_key_vault": "No"
+}

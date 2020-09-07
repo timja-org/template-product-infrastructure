@@ -1,0 +1,50 @@
+apiVersion: backstage.io/v1alpha1
+kind: Template
+metadata:
+  name: product-infrastructure
+  title: Product infrastructure template
+  description: Product infrastructure template, allows creating app insights, and Azure Key Vault.
+  tags:
+    - recommended
+    - terraform
+    - infrastructure
+    - application-insights
+    - azure
+    - key-vault
+    - secret
+spec:
+  owner: Platform Engineering (#rpe)
+  templater: cookiecutter
+  type: service
+  schema:
+    required:
+      - component_id
+    properties:
+      component_id:
+        title: Product
+        type: string
+        description: Product this component belongs to, normally the team name, e.g. cmc
+      description:
+        title: Description
+        type: string
+        description: Description of the product, a sensible default will be used if not specified.
+      enable_app_insights:
+        title: Add application insights
+        type: boolean
+        enumNames:
+          - 'Yes'
+          - 'No'
+        default: 'Yes'
+        description: We use application insights for logging, do you want to deploy it?
+      enable_key_vault:
+        title: Add Azure Key Vault
+        type: boolean
+        enumNames:
+          - 'Yes'
+          - 'No'
+        default: 'Yes'
+        description: Azure Key Vault is used for storing secrets, do you want to deploy it?
+      aad_group_object_id:
+        title: Product Azure Active Directory Group
+        type: string
+        description: (Optional, required if deploying a key vault), See https://github.com/hmcts/cnp-module-key-vault#product_group_object_id.
