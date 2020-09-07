@@ -31,18 +31,11 @@ spec:
       enable_app_insights:
         title: Add application insights
         type: boolean
-        enumNames:
-          - 'Yes'
-          - 'No'
-        default: 'Yes'
+        default: true
         description: We use application insights for logging, do you want to deploy it?
       enable_key_vault:
         title: Add Azure Key Vault
         type: boolean
-        enumNames:
-          - 'Yes'
-          - 'No'
-        default: 'Yes'
         description: Azure Key Vault is used for storing secrets, do you want to deploy it?
       aad_group_object_id:
         title: Product Azure Active Directory Group
