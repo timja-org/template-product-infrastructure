@@ -11,5 +11,5 @@ variable "jenkins_AAD_objectId" {}
 {% endif %}
 
 variable "common_tags" {
-  type = "map"
+  type = map(string)
 }

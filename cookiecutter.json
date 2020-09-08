@@ -3,6 +3,7 @@
   "product": "{{ cookiecutter.component_id }}",
   "description": "Product infrastructure for {{ cookiecutter.product }}",
   "aad_group_object_id": "",
+  "owner": "",
   "enable_app_insights": "True",
   "enable_key_vault": "False"
 }
