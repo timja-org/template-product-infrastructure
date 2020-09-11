@@ -40,4 +40,5 @@ spec:
       aad_group_object_id:
         title: Product Azure Active Directory Group
         type: string
+        # yamllint disable-line rule:line-length
         description: (Optional, required if deploying a key vault), See https://github.com/hmcts/cnp-module-key-vault#product_group_object_id.
