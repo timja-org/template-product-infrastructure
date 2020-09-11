@@ -16,9 +16,11 @@ They are discovered by using [GitHub search](https://github.com/hmcts/?q=cnp-mod
 
 You will likely want to install terraform,
 
-We recommend using [tfenv](https://github.com/tfutils/tfenv), as it will manage the terraform version and ensures you use the same version locally and on our build server.
+We recommend using [tfenv](https://github.com/tfutils/tfenv).
+It will manage the terraform version and ensures you use the same version locally and on our build server.
 
-The terraform version is managed by `.terraform-version` file in the root of the repo, you can update this whenever you want.
+The terraform version is managed by `.terraform-version` file in the root of the repo.
+You can update this whenever you want.
 
 ## Lint
 
