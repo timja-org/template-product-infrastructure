@@ -2,8 +2,9 @@
   "component_id": "",
   "product": "{{ cookiecutter.component_id }}",
   "description": "Product infrastructure for {{ cookiecutter.product }}",
-  "aad_group_object_id": "",
+  "aad_group_name": "",
   "owner": "",
   "enable_app_insights": "True",
-  "enable_key_vault": "False"
+  "enable_key_vault": "False",
+  "storePath": "https://github.com/hmcts/???"
 }

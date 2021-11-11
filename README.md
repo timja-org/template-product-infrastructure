@@ -31,6 +31,11 @@ $ cookiecutter ../template-shared-infrastructure/
 component_id []: rpetemplate
 product [rpetemplate]:
 description [We promise to update this description]:
+aad_group_name []:
+owner []:
+enable_app_insights [True]:
+enable_key_vault [False]:
+storePath [https://github.com/hmcts/???]:
 ```
 
 You should now have a templated repo in a subfolder based on the `component_id` that was chosen.

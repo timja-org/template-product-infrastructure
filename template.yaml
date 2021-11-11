@@ -37,7 +37,7 @@ spec:
         title: Add Azure Key Vault
         type: boolean
         description: Azure Key Vault is used for storing secrets, do you want to deploy it?
-      aad_group_object_id:
-        title: Product Azure Active Directory Group
+      product_group_name:
+        title: Product Group Name
         type: string
-        description: (Optional, required if deploying a key vault), See https://github.com/hmcts/cnp-module-key-vault#product_group_object_id.
+        description: (Optional, required if deploying a key vault), Your teams Azure AD group name.

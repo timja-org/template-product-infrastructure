@@ -6,7 +6,7 @@ variable "location" {
 
 variable "env" {}
 
-{%- if cookiecutter.enable_key_vault == 'Yes' %}
+{%- if cookiecutter.enable_key_vault == 'True' %}
 variable "jenkins_AAD_objectId" {}
 {% endif %}
 
