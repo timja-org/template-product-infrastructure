@@ -33,6 +33,10 @@ spec:
           title: Description
           type: string
           description: Description of the application, a sensible default will be used if not specified.
+        github_admin_team:
+          title: GitHub admin team
+          type: string
+          description: Which GitHub team should have admin permissions?
         enable_app_insights:
           title: Add application insights
           type: boolean
@@ -73,13 +77,13 @@ spec:
       input:
         url: ./skeleton
         values:
-          component_id: '{{ parameters.component_id }}'
-          description: '{{ parameters.description }}'
-          enable_app_insights: '{{ parameters.enable_app_insights }}'
-          enable_key_vault: '{{ parameters.enable_key_vault }}'
-          aad_group_name: '{{ parameters.aad_group_name }}'
-          owner: '{{ parameters.owner }}'
-          destination: '{{ parameters.repoUrl | parseRepoUrl }}'
+          component_id: '${{ parameters.component_id }}'
+          description: '${{ parameters.description }}'
+          enable_app_insights: '${{ parameters.enable_app_insights }}'
+          enable_key_vault: '${{ parameters.enable_key_vault }}'
+          aad_group_name: '${{ parameters.aad_group_name }}'
+          owner: '${{ parameters.owner }}'
+          destination: '${{ parameters.repoUrl | parseRepoUrl }}'
     - id: publish
       name: Publish
       action: publish:github
@@ -87,12 +91,17 @@ spec:
         allowedHosts: ['github.com']
         description: This is ${{ parameters.name }}
         repoUrl: ${{ parameters.repoUrl }}
+        access: ${{ parameters.github_admin_team }}
+        requireCodeOwnerReviews: true
+        repoVisibility: public
+        topics:
+          - ${{ parameters.component_id }}
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
+        repoContentsUrl: '${{ steps.publish.output.repoContentsUrl }}'
         catalogInfoPath: '/catalog-info.yaml'
   output:
-    remoteUrl: '{{ steps.publish.output.remoteUrl }}'
-    entityRef: '{{ steps.register.output.entityRef }}'
+    remoteUrl: '${{ steps.publish.output.remoteUrl }}'
+    entityRef: '${{ steps.register.output.entityRef }}'
