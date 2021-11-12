@@ -1,7 +1,7 @@
 {
   "component_id": "",
-  "product": "{{ cookiecutter.component_id }}",
-  "description": "Product infrastructure for {{ cookiecutter.product }}",
+  "product": "${{ values.component_id }}",
+  "description": "Product infrastructure for ${{ values.product }}",
   "aad_group_name": "",
   "owner": "",
   "enable_app_insights": "True",
