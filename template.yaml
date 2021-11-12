@@ -79,14 +79,14 @@ spec:
           enable_key_vault: '{{ parameters.enable_key_vault }}'
           aad_group_name: '{{ parameters.aad_group_name }}'
           owner: '{{ parameters.owner }}'
-          destination: '{{ parseRepoUrl parameters.repoUrl }}'
+          destination: '{{ parameters.repoUrl | parseRepoUrl }}'
     - id: publish
       name: Publish
       action: publish:github
       input:
         allowedHosts: ['github.com']
-        description: 'This is {{ parameters.component_id }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
     - id: register
       name: Register
       action: catalog:register
