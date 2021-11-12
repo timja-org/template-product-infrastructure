@@ -5,13 +5,11 @@ metadata:
   title: Product infrastructure template
   description: Product infrastructure template, allows creating app insights, and Azure Key Vault.
   tags:
-    - recommended
     - terraform
-    - infrastructure
-    - application-insights
-    - azure
-    - key-vault
-    - secret
+  links:
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=cloud-native
+      title: cloud-native on Slack
+      icon: chat
 spec:
   owner: dts_platform_operations
   type: service
@@ -21,15 +19,24 @@ spec:
       required:
         - component_id
         - owner
+        - slack_contact_channel
       properties:
         component_id:
           title: Product
           type: string
           description: Product this component belongs to, normally the team name, e.g. cmc
+        slack_contact_channel:
+          title: Slack contact channel
+          type: string
+          description: Which channel (or user) to contact if there's any issues with this service.
         description:
           title: Description
           type: string
           description: Description of the application, a sensible default will be used if not specified.
+        github_admin_team:
+          title: GitHub admin team
+          type: string
+          description: Which GitHub team should have admin permissions?
         enable_app_insights:
           title: Add application insights
           type: boolean
@@ -39,11 +46,10 @@ spec:
           title: Add Azure Key Vault
           type: boolean
           description: Azure Key Vault is used for storing secrets, do you want to deploy it?
-        product_group_name:
-          title: Product Group Name
+        aad_group_name:
+          title: Azure AD team group
           type: string
           description: (Optional, required if deploying a key vault), Your teams Azure AD group name.
-
         owner:
           title: Owner
           type: string
@@ -71,26 +77,32 @@ spec:
       input:
         url: ./skeleton
         values:
-          component_id: '{{ parameters.component_id }}'
-          description: '{{ parameters.description }}'
-          enable_app_insights: '{{ parameters.enable_app_insights }}'
-          enable_key_vault: '{{ parameters.enable_key_vault }}'
-          product_group_name: '{{ parameters.product_group_name }}'
-          owner: '{{ parameters.owner }}'
-          destination: '{{ parseRepoUrl parameters.repoUrl }}'
+          product: '${{ parameters.component_id }}'
+          description: '${{ parameters.description }}'
+          enable_app_insights: '${{ parameters.enable_app_insights }}'
+          enable_key_vault: '${{ parameters.enable_key_vault }}'
+          aad_group_name: '${{ parameters.aad_group_name }}'
+          owner: '${{ parameters.owner }}'
+          destination: '${{ parameters.repoUrl | parseRepoUrl }}'
+          slack_contact_channel: ${{ parameters.slack_contact_channel }}
     - id: publish
       name: Publish
       action: publish:github
       input:
         allowedHosts: ['github.com']
-        description: 'This is {{ parameters.component_id }}'
-        repoUrl: '{{ parameters.repoUrl }}'
+        description: This is ${{ parameters.name }}
+        repoUrl: ${{ parameters.repoUrl }}
+        access: ${{ parameters.github_admin_team }}
+        requireCodeOwnerReviews: true
+        repoVisibility: public
+        topics:
+          - ${{ parameters.component_id }}
     - id: register
       name: Register
       action: catalog:register
       input:
-        repoContentsUrl: '{{ steps.publish.output.repoContentsUrl }}'
+        repoContentsUrl: '${{ steps.publish.output.repoContentsUrl }}'
         catalogInfoPath: '/catalog-info.yaml'
   output:
-    remoteUrl: '{{ steps.publish.output.remoteUrl }}'
-    entityRef: '{{ steps.register.output.entityRef }}'
+    remoteUrl: '${{ steps.publish.output.remoteUrl }}'
+    entityRef: '${{ steps.register.output.entityRef }}'
