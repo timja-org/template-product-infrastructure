@@ -6,7 +6,6 @@ metadata:
   description: Product infrastructure template, allows creating app insights, and Azure Key Vault.
   tags:
     - terraform
-    - template
   links:
     - url: https://hmcts-reform.slack.com/app_redirect?channel=cloud-native
       title: cloud-native on Slack
@@ -43,8 +42,8 @@ spec:
           title: Add Azure Key Vault
           type: boolean
           description: Azure Key Vault is used for storing secrets, do you want to deploy it?
-        product_group_name:
-          title: Product Group Name
+        aad_group_name:
+          title: Azure AD team group
           type: string
           description: (Optional, required if deploying a key vault), Your teams Azure AD group name.
         owner:
@@ -78,7 +77,7 @@ spec:
           description: '{{ parameters.description }}'
           enable_app_insights: '{{ parameters.enable_app_insights }}'
           enable_key_vault: '{{ parameters.enable_key_vault }}'
-          product_group_name: '{{ parameters.product_group_name }}'
+          aad_group_name: '{{ parameters.aad_group_name }}'
           owner: '{{ parameters.owner }}'
           destination: '{{ parseRepoUrl parameters.repoUrl }}'
     - id: publish
