@@ -6,12 +6,12 @@ metadata:
   annotations:
     # This must match folder-name/job-name in Jenkins.
     jenkins.io/github-folder: 'HMCTS_${{ values.product }}/${{ values.product }}-product-infrastructure'
-    github.com/project-slug: '${{ values.storePath }}'
+    github.com/project-slug: '${{ values.destination }}'
   tags:
     - terraform
   links:
-    - url: https://hmcts-reform.slack.com/app_redirect?channel=${{ contact_channel }}
-      title: ${{ contact_channel }} on Slack
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=${{ slack_contact_channel }}
+      title: ${{ slack_contact_channel }} on Slack
       icon: chat
 spec:
   type: service

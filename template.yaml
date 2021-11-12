@@ -84,6 +84,7 @@ spec:
           aad_group_name: '${{ parameters.aad_group_name }}'
           owner: '${{ parameters.owner }}'
           destination: '${{ parameters.repoUrl | parseRepoUrl }}'
+          slack_contact_channel: ${{ parameters.slack_contact_channel }}
     - id: publish
       name: Publish
       action: publish:github
