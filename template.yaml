@@ -5,13 +5,12 @@ metadata:
   title: Product infrastructure template
   description: Product infrastructure template, allows creating app insights, and Azure Key Vault.
   tags:
-    - recommended
     - terraform
-    - infrastructure
-    - application-insights
-    - azure
-    - key-vault
-    - secret
+    - template
+  links:
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=cloud-native
+      title: cloud-native on Slack
+      icon: chat
 spec:
   owner: dts_platform_operations
   type: service
@@ -21,11 +20,16 @@ spec:
       required:
         - component_id
         - owner
+        - slack_contact_channel
       properties:
         component_id:
           title: Product
           type: string
           description: Product this component belongs to, normally the team name, e.g. cmc
+        slack_contact_channel:
+          title: Slack contact channel
+          type: string
+          description: Which channel (or user) to contact if there's any issues with this service.
         description:
           title: Description
           type: string
@@ -43,7 +47,6 @@ spec:
           title: Product Group Name
           type: string
           description: (Optional, required if deploying a key vault), Your teams Azure AD group name.
-
         owner:
           title: Owner
           type: string

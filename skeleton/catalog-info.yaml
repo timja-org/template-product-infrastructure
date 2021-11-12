@@ -9,6 +9,10 @@ metadata:
     github.com/project-slug: '${{ values.storePath }}'
   tags:
     - terraform
+  links:
+    - url: https://hmcts-reform.slack.com/app_redirect?channel=${{ contact_channel }}
+      title: ${{ contact_channel }} on Slack
+      icon: chat
 spec:
   type: service
   lifecycle: experimental
