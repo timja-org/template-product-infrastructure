@@ -77,7 +77,7 @@ spec:
       input:
         url: ./skeleton
         values:
-          component_id: '${{ parameters.component_id }}'
+          product: '${{ parameters.component_id }}'
           description: '${{ parameters.description }}'
           enable_app_insights: '${{ parameters.enable_app_insights }}'
           enable_key_vault: '${{ parameters.enable_key_vault }}'
